@@ -11,20 +11,20 @@ namespace Battleship
         static Random rnd = new Random(); //Zapíšeme sem, aby proměnná byla definovaná v celém programu
         static char[,] playerBoard = new char[10, 10];
         static char[,] computerBoard = new char[10, 10];
-        static char[,] playerView = new char[10, 10]; //Pole pocitace pouze s vodou, na ktere utoci hrac
+        static char[,] playerView = new char[10, 10]; //Pole pocitace pouze s vodou, ktere vidi hrac a utoci na nej
 
         static void PrintBoard(char[,] board)
         {
-            Console.WriteLine("   A B C D E F G H I J"); // Popisky sloupců
+            Console.WriteLine("   A B C D E F G H I J"); // Popisky sloupcu
             for (int i = 0; i < board.GetLength(0); i++)
             {
                 if (i + 1 < 10)
-                    Console.Write(" " + (i + 1)); // jednociferná čísla budou s mezeru, aby číslo 10 bylo na stejné úrovni
+                    Console.Write(" " + (i + 1)); // pred jednocifernymi cisly bude mezera, aby cislo 10 bylo na stejne urovni
                 else
-                    Console.Write((i + 1).ToString()); //pro číslo 10
+                    Console.Write((i + 1).ToString()); //pro cislo 10, s pomoci ChatGPT
                 for (int j = 0; j < board.GetLength(1); j++)
                 {
-                    Console.Write(" " + board[i, j]); //mezery pro přehlednost
+                    Console.Write(" " + board[i, j]); //mezery pro prehlednost
                 }
                 Console.WriteLine();
             }
@@ -36,7 +36,7 @@ namespace Battleship
             {
                 for (int j = 0; j < board.GetLength(1); j++)
                 {
-                    board[i, j] = '~'; // označuje vodu
+                    board[i, j] = '~'; // oznacuje vodu
                 }
             }
         }
@@ -45,12 +45,12 @@ namespace Battleship
         {
             x = -1;
             y = -1;
-            orientation = ' ';  //všechny proměnné na začátku nastavíme, nejlépe na neplatné hodnoty
+            orientation = ' ';  //vsechny promenne na zacatku nastavime, nejlepe na neplatne hodnoty
             char column = input[0];
 
             if (input.Length == 3)
             {
-                if (char.IsLetter(column) && int.TryParse(input.Substring(1, 1), out x) && (input[2] == 'H' || input[2] == 'V')) //¨Vyuziti Substring s pomoci ChatGPT
+                if (char.IsLetter(column) && int.TryParse(input.Substring(1, 1), out x) && (input[2] == 'H' || input[2] == 'V')) //Vyuziti Substring s pomoci ChatGPT
                 {
                     x--; //prevedeme na index, indexovani od nuly, proto vzdy cislo o 1 mensi
                     y = column - 'A';  //vypocita se rozdil mezi hodnotami pismen, hodnoty ASCII nalezeny na internetu
@@ -66,7 +66,7 @@ namespace Battleship
             {
                 if (char.IsLetter(column) && int.TryParse(input.Substring(1, 2), out x) && (input[3] == 'H' || input[3] == 'V')) //vyhovujici format
                 {
-                    x--; // Převod na index
+                    x--; // Prevod na index
                     y = column - 'A';
                     orientation = input[3];
                     return true;
@@ -293,7 +293,7 @@ namespace Battleship
                 {
                     PrintBoard(playerView);
                     Console.WriteLine("Jupii! Vyhrál jsi!");
-                    break;  //break ukončuje cyklus, v případě, že někdo vyhrál 
+                    break;  //break ukonci cyklus, v pripade, ze nekdo vyhral 
                 }
 
                 Console.WriteLine("Nyní hraje počítač");
